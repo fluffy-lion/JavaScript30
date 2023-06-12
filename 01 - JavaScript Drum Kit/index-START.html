@@ -60,6 +60,31 @@
 
 <script>
 
+window.addEventListener('keydown', (e) => {
+  // data-key is like custom attributes
+  // have to start with data
+  let audio = document.querySelector(`audio[data-key="${e.keyCode}"`)
+  let el = document.querySelector(`div[data-key="${e.keyCode}"`)
+  //  if there is no audio the stop
+  if(!audio) return
+  // reset the current audio time to 0
+  // this is the set the audio to play from the start again
+  // instead of waiting for it to end
+  audio.currentTime = 0
+  audio.play()
+  // add this css class
+  el.classList.add('playing')
+})
+
+let removeTransition = (e) => {
+  if(e.propertyName !== 'transform') return
+  // console.log(e.propertyName)
+  // this wouldnt work so had to use e.target
+  e.target.classList.remove('playing')
+}
+
+const keys = document.querySelectorAll('.key')
+keys.forEach(key => key.addEventListener('transitionend', removeTransition))
 </script>
 
 
