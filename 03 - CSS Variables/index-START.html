@@ -22,7 +22,22 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+  /* root, highest level you can get */
+  :root {
+    --base: #ffc600; 
+    --spacing: 10px;
+    --blur: 10px;
+  }
 
+  img {
+    padding: var(--spacing);
+    background: var(--base);
+    filter: blur(var(--blur));
+  }
+
+  .hl {
+    color: var(--base);
+  }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -44,8 +59,25 @@
       width: 100px;
     }
   </style>
-
+ <!-- css variables can be updated in JavaScript -->
+   
   <script>
+
+    //  node list is not the same as an array
+    // and array has lots of differnt methods to use
+    // node list does not 
+     const inputs = document.querySelectorAll(".controls input")
+
+     // this wont work if its an arrow function
+     function handleUpdate () {
+      // have the blank so it doesnt fire back undefined for the colour
+      const suffix = this.dataset.sizing || ""
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+      
+     }
+
+     inputs.forEach(input => input.addEventListener('change', handleUpdate))
+     inputs.forEach(input => input.addEventListener('mousemove', handleUpdate))
   </script>
 
 </body>
